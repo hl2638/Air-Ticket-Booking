@@ -1,0 +1,34 @@
+{% extends "airticket_booking/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    {% if success %}
+        <div class="content-section">
+            <div class="my-2"><h2>Airport Added</h2></div>
+            <div class="list-group">
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col"><strong>Airport City:</strong> {{ airport.airport_city }}</div>
+                        <div class="col"><strong>Airport Name:</strong> {{ airport.airport_name }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% elif failed %}
+        <div class="list-group-item">
+                {{ message }}
+            </div>
+    {% else %}
+        <div class="content-section">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Add Airport</legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Add</button>
+                </div>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

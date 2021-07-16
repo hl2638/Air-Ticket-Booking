@@ -1,0 +1,22 @@
+{% extends "airticket_booking/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+        <div class="list-group my-2">
+            <div class="my-2"><h1>Passengers Taking Flight {{ flight.flight_num }}</h1></div>
+            {% if passengers %}
+                {% for passenger in passengers %}
+                    <div class="list-group-item">
+                        <div class="row">
+                            <div class="col"><strong>Name:</strong> {{ passenger.name }}</div>
+                            <div class="col"><strong>Email:</strong> {{ passenger.email }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="list-group-item">
+                    No passengers taking this flight.
+                </div>
+            {% endif %}
+        </div>
+
+{% endblock %}

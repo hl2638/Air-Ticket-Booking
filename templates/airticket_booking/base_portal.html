@@ -1,0 +1,11 @@
+{% extends "airticket_booking/base.html" %}
+{% block content %}
+    {% if denied %}
+        <div class="alert alert-primary" role="alert">
+          Sorry, you are seeing this page because of a mistake, or you are trying to access features that do not belong to your user group. Access denied.
+        </div>
+    {% else %}
+        {% block portal_content %}
+        {% endblock %}
+    {% endif %}
+{% endblock %}

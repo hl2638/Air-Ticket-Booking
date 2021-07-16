@@ -1,0 +1,29 @@
+{% extends "airticket_booking/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <div class="my-2"><h2>Ticket Purchase Successful</h2></div>
+        <div class="list-group">
+            <div class="list-group-item">
+                <div class="row">
+                    <div class="col"><strong>Customer Email:</strong> {{ customer_email }}</div>
+                    <div class="col"><strong>Ticket ID:</strong> {{ ticket_id }}</div>
+                </div>
+                <div class="row">
+                    <div class="col"><strong>Airline:</strong> {{ flight.airplane.airline_name }}</div>
+                    <div class="col"><strong>Flight Number:</strong> {{ flight.flight_num }}</div>
+                </div>
+                <div class="row">
+                    <div class="col"><strong>From:</strong> {{ flight.departure_airport }}</div>
+                    <div class="col"><strong>To:</strong> {{ flight.arrival_airport}}</div>
+                </div>
+                <div class="row">
+                    <div class="col"><strong>Departs at:</strong> {{ flight.departure_time }}</div>
+                    <div class="col"><strong>Arrives at:</strong> {{ flight.arrival_time }}</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

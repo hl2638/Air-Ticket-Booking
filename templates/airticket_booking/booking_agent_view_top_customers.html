@@ -1,0 +1,99 @@
+{% extends "airticket_booking/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="my-2 container">
+        <div class="my-2"><h1>Top Customers</h1></div>
+        <div class="content-section">
+            <strong>Customers who have bought the most tickets in the past 6 months </strong>
+            <canvas id="bar1"></canvas>
+        </div>
+        <script>
+        var ctx = $('#bar1');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ labels1|safe }},
+                datasets: [{
+                    label: 'Tickets Bought',
+                    data: {{ data1|safe }},
+                    {#backgroundColor: [#}
+                    {#    'rgba(255, 99, 132, 0.2)',#}
+                    {#    'rgba(54, 162, 235, 0.2)',#}
+                    {#    'rgba(255, 206, 86, 0.2)',#}
+                    {#    'rgba(75, 192, 192, 0.2)',#}
+                    {#    'rgba(153, 102, 255, 0.2)',#}
+                    {#    'rgba(255, 159, 64, 0.2)'#}
+                    {#],#}
+                    {#borderColor: [#}
+                    {#    'rgba(255, 99, 132, 1)',#}
+                    {#    'rgba(54, 162, 235, 1)',#}
+                    {#    'rgba(255, 206, 86, 1)',#}
+                    {#    'rgba(75, 192, 192, 1)',#}
+                    {#    'rgba(153, 102, 255, 1)',#}
+                    {#    'rgba(255, 159, 64, 1)'#}
+                    {#],#}
+                    {#borderWidth: 1#}
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+        </script>
+        <div class="content-section">
+            <strong>Customers you received the most commission from last year</strong>
+            {% if labels2 %}
+                <canvas id="bar2"></canvas>
+                <script>
+                    var ctx = $('#bar2');
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: {{ labels2|safe }},
+                            datasets: [{
+                                label: 'Commission Received',
+                                data: {{ data2|safe }},
+                                {#backgroundColor: [#}
+                                {#    'rgba(255, 99, 132, 0.2)',#}
+                                {#    'rgba(54, 162, 235, 0.2)',#}
+                                {#    'rgba(255, 206, 86, 0.2)',#}
+                                {#    'rgba(75, 192, 192, 0.2)',#}
+                                {#    'rgba(153, 102, 255, 0.2)',#}
+                                {#    'rgba(255, 159, 64, 0.2)'#}
+                                {#],#}
+                                {#borderColor: [#}
+                                {#    'rgba(255, 99, 132, 1)',#}
+                                {#    'rgba(54, 162, 235, 1)',#}
+                                {#    'rgba(255, 206, 86, 1)',#}
+                                {#    'rgba(75, 192, 192, 1)',#}
+                                {#    'rgba(153, 102, 255, 1)',#}
+                                {#    'rgba(255, 159, 64, 1)'#}
+                                {#],#}
+                                {#borderWidth: 1#}
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                    </script>
+            {% else %}
+                No customers found.
+            {% endif %}
+        </div>
+    </div>
+
+
+{% endblock %}

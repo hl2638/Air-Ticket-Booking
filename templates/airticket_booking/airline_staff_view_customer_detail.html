@@ -1,0 +1,39 @@
+{% extends "airticket_booking/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container my-2">
+        <div class="my-2"><h2>Customer Detail</h2></div>
+        <div class="list-group my-2">
+            <div class="my-2"><h4>All flights taken with {{ airline_name }}</h4></div>
+            {% if flights %}
+                {% for flight in flights %}
+                    <div class="list-group-item">
+                        <div class="row">
+                            <div class="col"><strong>Flight Number:</strong> {{ flight.flight_num }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col"><strong>From:</strong> {{ flight.departure_airport }}</div>
+                            <div class="col"><strong>To:</strong> {{ flight.arrival_airport}}</div>
+                        </div>
+                        {% if flight.departure_date %}
+                        <div class="row">
+                            <div class="col"><strong>Departure date:</strong> {{ flight.departure_date }}</div>
+                        </div>
+                        {% endif %}
+                        <div class="row">
+                            <div class="col"><strong>Departs at:</strong> {{ flight.departure_time }}</div>
+                            <div class="col"><strong>Arrives at:</strong> {{ flight.arrival_time }}</div>
+                        </div>
+                        <div class="row p-1">
+                            <div class="col"><button class="btn  btn-outline-info m-1 py-0"><a href="{% url 'airline-staff-view-flight-detail' flight.pk %}">View Detail</a></button></div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="list-group-item">
+                    No flights available.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

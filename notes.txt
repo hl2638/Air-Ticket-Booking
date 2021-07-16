@@ -1,0 +1,33 @@
+Django provides a inspectdb method to import the sql database to Django python files. 
+Django doesn't support weak entities or combined primary keys. An alternative to do it is adding 'unique_together' constraints and not defining primary keys so django will automatically add an ID to the model.
+Django supports foreign keys, but not values of other columns of the model as the foreign key 
+    e.g. if Flight's airline_name points to airplane, you can only get the airplane's pk (or another unique key) but not airplane's airline name. 
+Django's models are more object oriented than MySQL schemas. For this reason and to maintain low coupling I'm using airplane (an object) instad of (airline_name, airplane_id) (a set of attributes representing the object) as a foreign key. Similar for other foreign keys.
+I'm following Corey Schafer's tutorial on Django.
+
+PROGRESS & TOTO:
+4/16 created skeleton
+TODO:
+set up admin account
+customize UserRegisterForm for three types of users
+
+4/17 created registerform for three types of users, added admin page for users.
+TODO:
+login
+logout
+add airplanes, flights
+add permissions
+
+4/18 redesigned user model: decoupled specific user types from user model; implemented login, profile and logout
+TODO:
+add airplanes, flights
+add permissions
+
+4/23
+adjusted model designs to fit django's style (more object-oriented, less attributes)
+added airplanes, airports and flights.
+added view flights
+added search flights
+TODO:
+add staff homepage
+add permissions

@@ -1,0 +1,43 @@
+{% extends "airticket_booking/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    {% if success %}
+        <div class="content-section">
+            <div class="my-2"><h2>Flight Created</h2></div>
+            <div class="list-group">
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col"><strong>Airline:</strong> {{ flight.airplane.airline_name }}</div>
+                        <div class="col"><strong>Flight Number:</strong> {{ flight.flight_num }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><strong>From:</strong> {{ flight.departure_airport }}</div>
+                        <div class="col"><strong>To:</strong> {{ flight.arrival_airport}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><strong>Departs at:</strong> {{ flight.departure_time }}</div>
+                        <div class="col"><strong>Arrives at:</strong> {{ flight.arrival_time }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><strong>Price:</strong> {{ flight.price }}</div>
+                        <div class="col"><strong>Status:</strong> {{ flight.status }}</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="content-section">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Create Flight</legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Create</button>
+                </div>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

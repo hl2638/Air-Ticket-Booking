@@ -1,0 +1,11 @@
+{% extends "airticket_booking/base.html" %}
+{% block content %}
+    <div class="container">
+        <button class="btn  btn-outline-info"><a href="{% url 'registerAirlineStaff' %}">Sign Up As An Airline Staff</a></button>
+        <button class="btn  btn-outline-info"><a href="{% url 'registerCustomer' %}">Sign Up As A Customer</a></button>
+        <button class="btn  btn-outline-info"><a href="{% url 'registerBookingAgent' %}">Sign Up As A Booking Agent</a></button>
+        <div class="border-top pt-3">
+            <small class="text-muted">Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a></small>
+        </div>
+    </div>
+{% endblock %}

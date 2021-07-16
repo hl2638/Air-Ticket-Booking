@@ -1,0 +1,23 @@
+{% extends "airticket_booking/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    <div class="list-group my-2">
+        <div class="my-2"><h1>Airplanes - {{ airline_name }}</h1></div>
+        {% if airplanes %}
+            {% for airplane in airplanes %}
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col"><strong>Airplane ID:</strong> {{ airplane.airplane_id }}</div>
+                        <div class="col"><strong>Seats:</strong> {{ airplane.seats }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="list-group-item">
+                No airplanes available.
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

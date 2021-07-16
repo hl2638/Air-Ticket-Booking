@@ -1,0 +1,27 @@
+{% extends "airticket_booking/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container my-2">
+        <div class="my-2"><h2>Frequent Customers</h2></div>
+        <div class="list-group my-2">
+            <div class="my-2"><h4>Most frequent customers in the past month</h4></div>
+            {% if customers %}
+                {% for customer in customers %}
+                    <div class="list-group-item">
+                        <div class="row">
+                            <div class="col"><strong>Customer Name:</strong> {{ customer.name }}</div>
+                            <div class="col"><strong>Email:</strong> {{ customer.email }}</div>
+                        </div>
+                        <div class="row m-2">
+                            <button class="btn  btn-outline-info m-1"><a href="{% url 'airline-staff-view-customer-detail' customer.pk %}">View Detail</a></button>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="list-group-item">
+                    No customers available.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

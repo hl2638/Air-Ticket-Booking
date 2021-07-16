@@ -1,0 +1,62 @@
+{% extends "airticket_booking/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="list-group my-2">
+        <div class="my-2"><h1>Revenue from direct/indirect sales</h1></div>
+
+        <div class="list-group-item">
+            <div class="content-section">
+                <div class="my-2"><h2>Last Month</h2></div>
+                {% if labels1 %}
+                    <canvas id="pie1"></canvas>
+                    <script>
+                        var ctx = $('#pie1');
+                        var myChart = new Chart(ctx, {
+                            type: 'pie',
+                            data: {
+                                labels: {{ labels1|safe }},
+                                datasets: [{
+                                    label: 'Revenue',
+                                    data: {{ data1|safe }},
+                                }]
+                            },
+                            options: {
+                                responsive: true
+                              }
+                        });
+                    </script>
+                {% else %}
+                    No revenue for last month.
+                {% endif %}
+            </div>
+
+        </div>
+
+        <div class="list-group-item">
+            <div class="content-section">
+                <div class="my-2"><h2>Last Year</h2></div>
+                {% if labels2 %}
+                    <canvas id="pie2"></canvas>
+                    <script>
+                        var ctx = $('#pie2');
+                        var myChart = new Chart(ctx, {
+                            type: 'pie',
+                            data: {
+                                labels: {{ labels2|safe }},
+                                datasets: [{
+                                    label: 'Revenue',
+                                    data: {{ data2|safe }},
+                                }]
+                            },
+                            options: {
+                                responsive: true
+                              }
+                        });
+                    </script>
+                {% else %}
+                    No revenue for last year.
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

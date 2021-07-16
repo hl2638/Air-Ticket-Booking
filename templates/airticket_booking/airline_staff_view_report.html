@@ -1,0 +1,80 @@
+{% extends "airticket_booking/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="my-2 container">
+        <div class="my-2"><h1>Sales Report</h1></div>
+        {% if not result %}
+            <div class="content-section">
+                <strong>Tickets sold last year</strong>
+                <canvas id="bar1"></canvas>
+            </div>
+            <script>
+            var ctx = $('#bar1');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: {{ labels|safe }},
+                    datasets: [{
+                        label: 'Tickets Sold',
+                        data: {{ data|safe }},
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+            </script>
+        {% else %}
+            <div class="content-section">
+                <strong>Tickets sold within specified range</strong>
+                {% if result.labels %}
+                    <canvas id="bar2"></canvas>
+                    <script>
+                        var ctx = $('#bar2');
+                        var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: {{ result.labels|safe }},
+                                datasets: [{
+                                    label: 'Tickets Sold',
+                                    data: {{ result.data|safe }},
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                        </script>
+                {% else %}
+                    No tickets sold.
+                {% endif %}
+            </div>
+        {% endif %}
+        <div class="content-section">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Specify a date range:</legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">View Report for This Range</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}

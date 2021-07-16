@@ -1,0 +1,37 @@
+{% extends "airticket_booking/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    {% if success %}
+        <div class="content-section">
+            <div class="my-2"><h2>Airplane Added</h2></div>
+            <div class="list-group">
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col"><strong>Airline:</strong> {{ airplane.airline_name }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><strong>Airplane ID:</strong> {{ airplane.airplane_id }}</div>
+                        <div class="col"><strong>Seats:</strong> {{ airplane.seats }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row py-1">
+                <div class="col"><button class="btn  btn-outline-info m-1 py-0"><a href="{% url 'airline-staff-view-airplanes'%}">View All Airplanes</a></button></div>
+            </div>
+        </div>
+    {% else %}
+        <div class="content-section">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Add Airplane</legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Add</button>
+                </div>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "airticket_booking/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <div class="list-group my-2">
+            <div class="my-2"><h1>My Commission</h1></div>
+            <div class="list-group-item">
+                <strong>Commission Earned in the Past 30 Days: </strong> {{ total_commission }}
+            </div>
+            <div class="list-group-item">
+                <strong>Average Commission in the Past 30 Days: </strong> {{ avg_commission }}
+            </div>
+            <div class="list-group-item">
+                <strong>Number of Tickets Purchased in the past 30 days: </strong> {{ num_tickets }}
+            </div>
+        </div>
+    </div>
+    {% if result %}
+        <div class="content-section">
+            <div class="list-group my-2">
+                <div class="my-2"><h1>Filtered Result</h1></div>
+                <div class="list-group-item">
+                    <strong>Commission Earned in this date range: </strong> {{ result.total_commission }}
+                </div>
+                <div class="list-group-item">
+                    <strong>Average Commission in this date range: </strong> {{ result.avg_commission }}
+                </div>
+                <div class="list-group-item">
+                    <strong>Number of Tickets Purchased in this date range: </strong> {{ result.num_tickets }}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Specify a date range:</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">View Commission Within This Range</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
